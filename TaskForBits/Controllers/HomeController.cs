@@ -13,8 +13,7 @@ namespace TaskForBits.Controllers
         {
             string connectionString = @"Data Source=DESKTOP-R7LP984;Initial Catalog=BitsDB;Integrated Security=True";
             DBService dBService = new DBService();
-            List<User> users = new List<User>();
-            users = dBService.GetUsers(connectionString);
+            List<User> users = dBService.GetUsers(connectionString);
             ViewBag.Users = users;
             return View();
         }
@@ -33,6 +32,23 @@ namespace TaskForBits.Controllers
         {
             DBService dBService = new DBService();
             dBService.DeleteUser(UserID);
+            return Redirect("/Home");
+        }
+        [HttpGet]
+        public ActionResult EditUser(int UserID)
+        {
+            string connectionString = @"Data Source=DESKTOP-R7LP984;Initial Catalog=BitsDB;Integrated Security=True";
+            DBService dBService = new DBService();
+            List<User> users = dBService.GetUsers(connectionString);
+            ViewBag.User = users.Find(User => User.UserID == UserID);
+            return View();
+        }
+        [HttpPost]
+        public RedirectResult EditUser(User user)
+        {
+
+
+
             return Redirect("/Home");
         }
     }

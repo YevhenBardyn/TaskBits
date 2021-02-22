@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "EditUser";
+}
+
+<h2>EditUser</h2>
+<input type="hidden" value="@ViewBag.UserID" name="UserID" />
+<div class="row">
+    <div class="col-md-2">Name</div>
+    <input name="Name" type="text" class="col-md-10" value="@ViewBag.User.Name">
+</div>
+<br />
+<div class="row">
+    <div class="col-md-2">Date Of Birth</div>
+    <input name="DateOfBirth" type="text" class="col-md-10" value="@ViewBag.User.DateOfBirth.ToShortDateString()">
+</div>
+<br />
+<div class="row">
+    <div class="col-md-2">Married</div>
+    <input name="Married" type="text" class="col-md-10" value="@ViewBag.User.Married.ToString()">
+</div>
+<br />
+<div class="row">
+    <div class="col-md-2">Phone</div>
+    <input name="Phone" type="text" class="col-md-10" value="@ViewBag.User.Phone">
+</div>
+<br />
+<div class="row">
+    <div class="col-md-2">Salary</div>
+    <input name="Salary" type="text" class="col-md-10" value="@ViewBag.User.Salary">
+</div>
+<br />
+    <div><a  class="submit-button" href="\Home">Redirect To Home</a></div>

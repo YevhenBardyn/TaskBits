@@ -11,7 +11,7 @@
 <div>
     <br />
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-1">
             UserID
         </div>
         <div class="col-md-2">
@@ -34,7 +34,7 @@
     {
         <br />
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 @item.UserID
             </div>
             <div class="col-md-2">
@@ -52,7 +52,8 @@
             <div class="col-md-2">
                 @item.Salary
             </div>
-            <a class="col-md-1, edit-button" href="/Home/DeleteUser?UserID=@item.UserID">DELETE</a>
+            <a class="col-md-1, edit-button" href="/Home/EditUser?UserID=@item.UserID">EDIT</a>
+            <a class="col-md-1, delete-button" href="/Home/DeleteUser?UserID=@item.UserID">DELETE</a>
         </div>
     }
 </div>
