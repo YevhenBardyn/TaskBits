@@ -1,59 +1,25 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-</div>
-<div>
-    <a href="\Home\ImportFromCSVToDB" >IMPORT</a>
-</div>
-<div>
-    <br />
-    <div class="row">
-        <div class="col-md-1">
-            UserID
-        </div>
-        <div class="col-md-2">
-            Name
-        </div>
-        <div class="col-md-2">
-           Date Of Birth
-        </div>
-        <div class="col-md-1">
-           Married
-        </div>
-        <div class="col-md-2">
-           Phone
-        </div>
-        <div class="col-md-2">
-            Salary
-        </div>
+﻿@model IEnumerable<TaskForBits.Models.User>
+@{ 
+    AjaxOptions ajaxOptions = new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "Dura" };
+}    
+<div id="Dura">
+    @Html.Partial("FilterUser", Model)
     </div>
-    @foreach (var item in ViewBag.Users)
-    {
-        <br />
-        <div class="row">
-            <div class="col-md-1">
-                @item.UserID
-            </div>
-            <div class="col-md-2">
-                @item.Name
-            </div>
-            <div class="col-md-2">
-                @item.DateOfBirth.ToShortDateString()
-            </div>
-            <div class="col-md-1">
-                @item.Married
-            </div>
-            <div class="col-md-2">
-                @item.Phone
-            </div>
-            <div class="col-md-2">
-                @item.Salary
-            </div>
-            <a class="col-md-1, edit-button" href="/Home/EditUser?UserID=@item.UserID">EDIT</a>
-            <a class="col-md-1, delete-button" href="/Home/DeleteUser?UserID=@item.UserID">DELETE</a>
-        </div>
-    }
-</div>
+<script>
+    $(document).ready(function () {
+        $("#UserID").click(function () {
+            $.ajax({
+                type: "post",
+                url: "/Home/FilterUser?filterColumn=UserID",
+                content: "html",
+                dataType: "html"
+                //success: function (result) {
+                //    alert("ZalupaDupa");
+                //}
+            }).done(function () {
+                $(this).addClass("done");
+            });
+        })
+    });
+
+</script>

@@ -1,33 +1,32 @@
-﻿
-@{
-    ViewBag.Title = "EditUser";
+﻿@model TaskForBits.Models.User
+@{ 
+    ViewBag.Title = "Title";
 }
-
 <h2>EditUser</h2>
-<input type="hidden" value="@ViewBag.UserID" name="UserID" />
+<input type="hidden" value="@Model.UserID" name="UserID" />
 <div class="row">
     <div class="col-md-2">Name</div>
-    <input name="Name" type="text" class="col-md-10" value="@ViewBag.User.Name">
+    <input name="Name" type="text" class="col-md-10" value="@Model.Name">
 </div>
 <br />
 <div class="row">
     <div class="col-md-2">Date Of Birth</div>
-    <input name="DateOfBirth" type="text" class="col-md-10" value="@ViewBag.User.DateOfBirth.ToShortDateString()">
+    <input name="DateOfBirth" type="text" class="col-md-10" value="@Model.DateOfBirth.ToShortDateString()">
 </div>
 <br />
 <div class="row">
     <div class="col-md-2">Married</div>
-    <input name="Married" type="text" class="col-md-10" value="@ViewBag.User.Married.ToString()">
+    <input name="Married" type="text" class="col-md-10" value="@Model.Married.ToString()">
 </div>
 <br />
 <div class="row">
     <div class="col-md-2">Phone</div>
-    <input name="Phone" type="text" class="col-md-10" value="@ViewBag.User.Phone">
+    <input name="Phone" type="text" class="col-md-10" value="@Model.Phone">
 </div>
 <br />
 <div class="row">
     <div class="col-md-2">Salary</div>
-    <input name="Salary" type="text" class="col-md-10" value="@ViewBag.User.Salary">
+    <input name="Salary" type="text" class="col-md-10" value="@Model.Salary">
 </div>
 <br />
     <div><a  class="submit-button" href="\Home">Redirect To Home</a></div>

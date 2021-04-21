@@ -5,21 +5,31 @@ using System.Web;
 using System.Web.Mvc;
 using TaskForBits.Services;
 using TaskForBits.Models;
+using System.Configuration;
+using System.Web.Mvc.Ajax;
+
 namespace TaskForBits.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            string connectionString = @"Data Source=DESKTOP-R7LP984;Initial Catalog=BitsDB;Integrated Security=True";
+            string connectionString = ConfigurationManager.ConnectionStrings["MainContext"].ConnectionString;
             DBService dBService = new DBService();
             List<User> users = dBService.GetUsers(connectionString);
-            ViewBag.Users = users;
-            return View();
+            return View(users);
+        }
+        public PartialViewResult FilterUser(string filterColumn)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["MainContext"].ConnectionString;
+            DBService dBService = new DBService();
+            IEnumerable<User> users = dBService.GetUsers(connectionString);
+            ViewBag.Users = users.OrderBy(User=>User.Name);
+            return PartialView("FilterUser.cshtml", users.OrderBy(User => User.Name));
         }
         public RedirectResult ImportFromCSVToDB()
         {
-            string connectionString = @"Data Source=DESKTOP-R7LP984;Initial Catalog=BitsDB;Integrated Security=True";
+            string connectionString = ConfigurationManager.ConnectionStrings["MainContext"].ConnectionString;
             CSVService cSVService = new CSVService();
             DBService dBService = new DBService();
             foreach (var item in cSVService.GetUsersFromCsv(Server.MapPath("..\\data.csv")))
@@ -37,19 +47,23 @@ namespace TaskForBits.Controllers
         [HttpGet]
         public ActionResult EditUser(int UserID)
         {
-            string connectionString = @"Data Source=DESKTOP-R7LP984;Initial Catalog=BitsDB;Integrated Security=True";
+            string connectionString = ConfigurationManager.ConnectionStrings["MainContext"].ConnectionString;
             DBService dBService = new DBService();
             List<User> users = dBService.GetUsers(connectionString);
-            ViewBag.User = users.Find(User => User.UserID == UserID);
-            return View();
+            return View(users.Find(User => User.UserID == UserID));
         }
         [HttpPost]
         public RedirectResult EditUser(User user)
         {
-
+            User user1 = user;
 
 
             return Redirect("/Home");
         }
+        //public JsonResult FilterUser(string filterColumn)
+        //{
+
+        //    return Json(string.Empty, JsonRequestBehavior.AllowGet);
+        //}
     }
 }
