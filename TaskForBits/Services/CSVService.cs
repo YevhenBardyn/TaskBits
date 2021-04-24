@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -16,18 +18,15 @@ namespace TaskForBits.Services
         public List<User> GetUsersFromCsv(string path)
         {
             List<User> users = new List<User>();
-            using (var reader = new StreamReader(path))
+            using (StreamReader reader = new StreamReader(path))
+            using (CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                string header =  reader.ReadLine();
-                for (int i = 0; !reader.EndOfStream; i++)
+                foreach(BaseUser baseUser in csv.GetRecords<BaseUser>().ToList())
                 {
-                    var line = reader.ReadLine();
-                    string[] values = line.Split(',');
-                    users.Add(new User(values));
-
+                    users.Add(new User(baseUser));
                 }
+                return users;
             }
-            return users;
         }
     }
 }

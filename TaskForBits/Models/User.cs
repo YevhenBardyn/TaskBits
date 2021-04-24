@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 
 namespace TaskForBits.Models
 {
-    public class User
+    public class User : BaseUser
     {
         public User()
         {
@@ -29,6 +30,15 @@ namespace TaskForBits.Models
             Phone = values[3];
             Salary = Convert.ToDecimal(values[4]);
         }
+        public User(BaseUser baseUser)
+        {
+            UserID = 0;
+            Name = baseUser.Name;
+            DateOfBirth = baseUser.DateOfBirth;
+            Phone = baseUser.Phone;
+            Salary = baseUser.Salary;
+        }
+
 
         public object this[string PropertyName]
         {
@@ -39,14 +49,8 @@ namespace TaskForBits.Models
                 return pi.GetValue(this, null);
             }
         }
-
         public int UserID { get; set; }
-        public string Name { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public bool Married { get; set; }
-        public string Phone { get; set; }
-        public Decimal Salary { get; set; }
-   
+       
 
     }
 }

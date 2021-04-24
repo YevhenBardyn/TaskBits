@@ -10,11 +10,11 @@ namespace TaskForBits.Services
     {
 
 
-        public void SetUserIntoDB(User user)
+        public void SetUserIntoDB(BaseUser user)
         {
             using (UserContext db = new UserContext())
             {
-                db.Users.Add(user);
+                db.Users.Add((User)user);
                 db.SaveChanges();
             }
         }
@@ -31,8 +31,7 @@ namespace TaskForBits.Services
         {
             using (UserContext db = new UserContext())
             {
-                User user = (from c in db.Users where c.UserID == UserID select c).FirstOrDefault();
-                db.Users.Remove(user);
+                db.Users.Remove((from c in db.Users where c.UserID == UserID select c).FirstOrDefault());
                 db.SaveChanges();
             }
         }
