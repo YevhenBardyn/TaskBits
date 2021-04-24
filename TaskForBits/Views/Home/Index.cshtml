@@ -1,23 +1,22 @@
 ﻿@model IEnumerable<TaskForBits.Models.User>
 
+    <div id="IndexRecall">
+        @Html.Partial("FilterUser", Model)
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#UserID, #Name, #DateOfBirth, #Married, #Phone, #Salary").click(function (event) {
+                $.ajax({
+                    type: "post",
+                    url: '/Home/Index?filterColumn=' + event.target.id,
+                    type: "POST",
+                    success: function (result) {
+                        $("#IndexRecall").html(result);
+                    }
+                }).done(function () {
+                    $(this).addClass("done");
+                });
+            })
+        });
 
-<div id="IndexRecall">
-    @Html.Partial("FilterUser", Model)
-</div>
-<script>
-    $(document).ready(function () {
-        $("#UserID, #Name, #DateOfBirth, #Married, #Phone, #Salary").click(function (event) {
-            $.ajax({
-                type: "post",
-                url: '/Home/Index?filterColumn=' + event.target.id,
-                type: "POST",
-                success: function (result) {
-                    $("#IndexRecall").html(result);
-                }
-            }).done(function () {
-                $(this).addClass("done");
-            });
-        })
-    });
-
-</script>
+    </script>

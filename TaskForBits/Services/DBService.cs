@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,6 @@ namespace TaskForBits.Services
 {
     public class DBService
     {
-
-
         public void SetUserIntoDB(User user)
         {
             using (UserContext db = new UserContext())
@@ -21,7 +20,6 @@ namespace TaskForBits.Services
         public List<User> GetUsers(string strConn)
         {
             List<User> users = new List<User>();
-
             using (UserContext db = new UserContext())
             {
                 return (from c in db.Users select c).ToList();
@@ -33,6 +31,24 @@ namespace TaskForBits.Services
             {
                 db.Users.Remove((from c in db.Users where c.UserID == UserID select c).FirstOrDefault());
                 db.SaveChanges();
+            }
+        }
+        public void EditUserInDB(User user)
+        {
+            using (UserContext db = new UserContext())
+            {
+                User curUser = new User();
+                if ((from c in db.Users where c.UserID == user.UserID select c).FirstOrDefault() != null)
+                {
+                    curUser = (from c in db.Users where c.UserID == user.UserID select c).FirstOrDefault();
+                    curUser.DateOfBirth = user.DateOfBirth;
+                    curUser.Name = user.Name;
+                    curUser.Phone = user.Phone;
+                    curUser.Married = user.Married;
+                    curUser.Salary = user.Salary;
+                    db.Entry(curUser).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
             }
         }
     }

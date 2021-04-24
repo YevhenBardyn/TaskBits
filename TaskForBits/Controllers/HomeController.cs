@@ -52,9 +52,8 @@ namespace TaskForBits.Controllers
         [HttpPost]
         public RedirectResult EditUser(User user)
         {
-            User user1 = user;
-
-
+            DBService dBService = new DBService();
+            dBService.EditUserInDB(user);
             return Redirect("/Home");
         }
     }
