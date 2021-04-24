@@ -1,21 +1,19 @@
 ﻿@model IEnumerable<TaskForBits.Models.User>
-@{ 
-    AjaxOptions ajaxOptions = new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "Dura" };
-}    
-<div id="Dura">
+
+
+<div id="IndexRecall">
     @Html.Partial("FilterUser", Model)
-    </div>
+</div>
 <script>
     $(document).ready(function () {
-        $("#UserID").click(function () {
+        $("#UserID, #Name, #DateOfBirth, #Married, #Phone, #Salary").click(function (event) {
             $.ajax({
                 type: "post",
-                url: "/Home/FilterUser?filterColumn=UserID",
-                content: "html",
-                dataType: "html"
-                //success: function (result) {
-                //    alert("ZalupaDupa");
-                //}
+                url: '/Home/Index?filterColumn=' + event.target.id,
+                type: "POST",
+                success: function (result) {
+                    $("#IndexRecall").html(result);
+                }
             }).done(function () {
                 $(this).addClass("done");
             });

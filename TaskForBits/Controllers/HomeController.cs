@@ -14,27 +14,25 @@ namespace TaskForBits.Controllers
     {
         public ActionResult Index()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["MainContext"].ConnectionString;
             DBService dBService = new DBService();
-            List<User> users = dBService.GetUsers(connectionString);
+            List<User> users = dBService.GetUsers(ConfigurationManager.ConnectionStrings["MainContext"].ConnectionString);
             return View(users);
         }
-        public PartialViewResult FilterUser(string filterColumn)
+
+        [HttpPost]
+        public ActionResult Index(string filterColumn)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["MainContext"].ConnectionString;
             DBService dBService = new DBService();
-            IEnumerable<User> users = dBService.GetUsers(connectionString);
-            ViewBag.Users = users.OrderBy(User=>User.Name);
-            return PartialView("FilterUser.cshtml", users.OrderBy(User => User.Name));
+            IEnumerable<User> users = dBService.GetUsers(ConfigurationManager.ConnectionStrings["MainContext"].ConnectionString);
+            return PartialView(users.OrderBy(prop => prop[filterColumn]));
         }
         public RedirectResult ImportFromCSVToDB()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["MainContext"].ConnectionString;
             CSVService cSVService = new CSVService();
             DBService dBService = new DBService();
             foreach (var item in cSVService.GetUsersFromCsv(Server.MapPath("..\\data.csv")))
             {
-                dBService.SetUserIntoDB(item, connectionString);
+                dBService.SetUserIntoDB(item);
             }
             return Redirect("/Home");
         }
@@ -47,9 +45,8 @@ namespace TaskForBits.Controllers
         [HttpGet]
         public ActionResult EditUser(int UserID)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["MainContext"].ConnectionString;
             DBService dBService = new DBService();
-            List<User> users = dBService.GetUsers(connectionString);
+            List<User> users = dBService.GetUsers(ConfigurationManager.ConnectionStrings["MainContext"].ConnectionString);
             return View(users.Find(User => User.UserID == UserID));
         }
         [HttpPost]
@@ -60,10 +57,5 @@ namespace TaskForBits.Controllers
 
             return Redirect("/Home");
         }
-        //public JsonResult FilterUser(string filterColumn)
-        //{
-
-        //    return Json(string.Empty, JsonRequestBehavior.AllowGet);
-        //}
     }
 }

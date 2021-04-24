@@ -85,3 +85,7 @@ C:\Users\User\source\repos\TaskForBits\TaskForBits\obj\Debug\TaskForBits.csproj.
 C:\Users\User\source\repos\TaskForBits\TaskForBits\obj\Debug\TaskForBits.dll
 C:\Users\User\source\repos\TaskForBits\TaskForBits\obj\Debug\TaskForBits.pdb
 C:\Users\User\source\repos\TaskForBits\TaskForBits\bin\data.csv
+C:\Users\User\source\repos\TaskForBits\TaskForBits\bin\EntityFramework.dll
+C:\Users\User\source\repos\TaskForBits\TaskForBits\bin\EntityFramework.SqlServer.dll
+C:\Users\User\source\repos\TaskForBits\TaskForBits\bin\EntityFramework.xml
+C:\Users\User\source\repos\TaskForBits\TaskForBits\bin\EntityFramework.SqlServer.xml

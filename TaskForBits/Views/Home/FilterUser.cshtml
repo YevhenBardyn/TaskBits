@@ -14,19 +14,19 @@
             <input name="UserID" id="UserID" type="submit" value="UserID" />
         </div>
         <div class="col-md-2">
-            Name
+            <input name="Name" id="Name" type="submit" value="UserID" />
         </div>
         <div class="col-md-2">
-            Date Of Birth
+            <input name="DateOfBirth" id="DateOfBirth" type="submit" value="DateOfBirth" />
         </div>
         <div class="col-md-1">
-            Married
+            <input name="Married" id="Married" type="submit" value="Married" />
         </div>
         <div class="col-md-2">
-            Phone
+            <input name="Phone" id="Phone" type="submit" value="Phone" />
         </div>
         <div class="col-md-2">
-            Salary
+            <input name="Salary" id="Salary" type="submit" value="Salary" />
         </div>
     </div>
     @foreach (var item in Model)
@@ -56,22 +56,3 @@
         </div>
     }
 </div>
-
-<script>
-    $(document).ready(function () {
-        $("#UserID").click(function () {
-            $.ajax({
-                type: "post",
-                url: "/Home/FilterUser?filterColumn=UserID",
-                content: "html",
-                dataType: "html"
-                //success: function (result) {
-                //    alert("ZalupaDupa");
-                //}
-            }).done(function () {
-                $(this).addClass("done");
-            });
-        })
-    });
-
-</script>
