@@ -10,11 +10,11 @@ namespace TaskForBits.Services
     {
 
 
-        public void SetUserIntoDB(BaseUser user)
+        public void SetUserIntoDB(User user)
         {
             using (UserContext db = new UserContext())
             {
-                db.Users.Add((User)user);
+                db.Users.Add(user);
                 db.SaveChanges();
             }
         }
