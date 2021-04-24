@@ -10,7 +10,6 @@ namespace TaskForBits.Models
     {
         public UserContext() : base("MainContext")
         { }
-
         public DbSet<User> Users { get; set; }
     }
 }

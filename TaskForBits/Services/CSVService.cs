@@ -11,10 +11,6 @@ namespace TaskForBits.Services
 {
     public class CSVService
     {
-
-
-
-
         public List<User> GetUsersFromCsv(string path)
         {
             List<User> users = new List<User>();

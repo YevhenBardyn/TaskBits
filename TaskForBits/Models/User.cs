@@ -9,6 +9,7 @@ namespace TaskForBits.Models
 {
     public class User : BaseUser
     {
+        public int UserID { get; set; }
         public User()
         {
         }
@@ -38,8 +39,6 @@ namespace TaskForBits.Models
             Phone = baseUser.Phone;
             Salary = baseUser.Salary;
         }
-
-
         public object this[string PropertyName]
         {
             get
@@ -49,8 +48,5 @@ namespace TaskForBits.Models
                 return pi.GetValue(this, null);
             }
         }
-        public int UserID { get; set; }
-       
-
     }
 }

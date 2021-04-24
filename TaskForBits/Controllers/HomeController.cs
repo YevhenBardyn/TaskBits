@@ -15,7 +15,7 @@ namespace TaskForBits.Controllers
         public ActionResult Index()
         {
             DBService dBService = new DBService();
-            List<User> users = dBService.GetUsers(ConfigurationManager.ConnectionStrings["MainContext"].ConnectionString);
+            List<User> users = dBService.GetUsers();
             return View(users);
         }
 
@@ -23,7 +23,7 @@ namespace TaskForBits.Controllers
         public ActionResult Index(string filterColumn)
         {
             DBService dBService = new DBService();
-            IEnumerable<User> users = dBService.GetUsers(ConfigurationManager.ConnectionStrings["MainContext"].ConnectionString);
+            IEnumerable<User> users = dBService.GetUsers();
             return PartialView(users.OrderBy(prop => prop[filterColumn]));
         }
         public RedirectResult ImportFromCSVToDB()
@@ -46,7 +46,7 @@ namespace TaskForBits.Controllers
         public ActionResult EditUser(int UserID)
         {
             DBService dBService = new DBService();
-            List<User> users = dBService.GetUsers(ConfigurationManager.ConnectionStrings["MainContext"].ConnectionString);
+            List<User> users = dBService.GetUsers();
             return View(users.Find(User => User.UserID == UserID));
         }
         [HttpPost]

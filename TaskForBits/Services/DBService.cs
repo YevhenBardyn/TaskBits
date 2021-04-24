@@ -17,9 +17,8 @@ namespace TaskForBits.Services
                 db.SaveChanges();
             }
         }
-        public List<User> GetUsers(string strConn)
+        public List<User> GetUsers()
         {
-            List<User> users = new List<User>();
             using (UserContext db = new UserContext())
             {
                 return (from c in db.Users select c).ToList();
