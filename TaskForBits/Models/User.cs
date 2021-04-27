@@ -22,15 +22,15 @@ namespace TaskForBits.Models
             Phone = phone;
             Salary = salary;
         }
-        public User(string[] values)
-        {
-            UserID = 0;
-            Name = values[0];
-            DateOfBirth = Convert.ToDateTime(values[1]);
-            Married = Convert.ToBoolean(Convert.ToInt32(values[2]));
-            Phone = values[3];
-            Salary = Convert.ToDecimal(values[4]);
-        }
+        //public User(string[] values)
+        //{
+        //    UserID = 0;
+        //    Name = values[0];
+        //    DateOfBirth = Convert.ToDateTime(values[1]);
+        //    Married = Convert.ToBoolean(Convert.ToInt32(values[2]));
+        //    Phone = values[3];
+        //    Salary = Convert.ToDecimal(values[4]);
+        //}
         public User(BaseUser baseUser)
         {
             UserID = 0;

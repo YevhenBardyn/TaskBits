@@ -9,33 +9,23 @@ namespace TaskForBits.Services
 {
     public class DBService
     {
+        private readonly UserContext db = new UserContext();
         public void SetUserIntoDB(User user)
         {
-            using (UserContext db = new UserContext())
-            {
                 db.Users.Add(user);
                 db.SaveChanges();
-            }
         }
         public List<User> GetUsers()
         {
-            using (UserContext db = new UserContext())
-            {
                 return (from c in db.Users select c).ToList();
-            }
         }
         public void DeleteUser(int UserID)
         {
-            using (UserContext db = new UserContext())
-            {
                 db.Users.Remove((from c in db.Users where c.UserID == UserID select c).FirstOrDefault());
                 db.SaveChanges();
-            }
         }
         public void EditUserInDB(User user)
         {
-            using (UserContext db = new UserContext())
-            {
                 User curUser = new User();
                 if ((from c in db.Users where c.UserID == user.UserID select c).FirstOrDefault() != null)
                 {
@@ -47,7 +37,6 @@ namespace TaskForBits.Services
                     curUser.Salary = user.Salary;
                     db.Entry(curUser).State = EntityState.Modified;
                     db.SaveChanges();
-                }
             }
         }
     }
