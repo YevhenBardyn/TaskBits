@@ -12,9 +12,9 @@ namespace TaskForBits.Controllers
 {
     public class HomeController : Controller
     {
+        DBService dBService = new DBService();
         public ActionResult Index()
         {
-            DBService dBService = new DBService();
             List<User> users = dBService.GetUsers();
             return View(users);
         }
@@ -22,14 +22,12 @@ namespace TaskForBits.Controllers
         [HttpPost]
         public ActionResult Index(string filterColumn)
         {
-            DBService dBService = new DBService();
             IEnumerable<User> users = dBService.GetUsers();
             return PartialView(users.OrderBy(prop => prop[filterColumn]));
         }
         public RedirectResult ImportFromCSVToDB()
         {
             CSVService cSVService = new CSVService();
-            DBService dBService = new DBService();
             foreach (var item in cSVService.GetUsersFromCsv(Server.MapPath("..\\data.csv")))
             {
                 dBService.SetUserIntoDB(item);
@@ -38,21 +36,18 @@ namespace TaskForBits.Controllers
         }
         public RedirectResult DeleteUser(int UserID)
         {
-            DBService dBService = new DBService();
             dBService.DeleteUser(UserID);
             return Redirect("/Home");
         }
         [HttpGet]
         public ActionResult EditUser(int UserID)
         {
-            DBService dBService = new DBService();
             List<User> users = dBService.GetUsers();
             return View(users.Find(User => User.UserID == UserID));
         }
         [HttpPost]
         public RedirectResult EditUser(User user)
         {
-            DBService dBService = new DBService();
             dBService.EditUserInDB(user);
             return Redirect("/Home");
         }

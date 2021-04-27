@@ -13,9 +13,8 @@ namespace TaskForBits.Models
         public User()
         {
         }
-        public User(int userID, string name, DateTime dateOfBirth, bool married, string phone, decimal salary)
+        public User(string name, DateTime dateOfBirth, bool married, string phone, decimal salary)
         {
-            UserID = userID;
             Name = name;
             DateOfBirth = dateOfBirth;
             Married = married;
@@ -24,7 +23,6 @@ namespace TaskForBits.Models
         }
         public User(BaseUser baseUser)
         {
-            UserID = 0;
             Name = baseUser.Name;
             DateOfBirth = baseUser.DateOfBirth;
             Phone = baseUser.Phone;
