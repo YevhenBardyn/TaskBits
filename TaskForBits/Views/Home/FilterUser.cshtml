@@ -22,8 +22,12 @@
             <div class="col-md-2">
                 @item.Salary
             </div>
-            <a class="col-md-1, edit-button" href="/Home/EditUser?UserID=@item.UserID">EDIT</a>
-            <a class="col-md-1, delete-button" href="/Home/DeleteUser?UserID=@item.UserID">DELETE</a>
+            <div class="col-md-1">
+                @Html.ActionLink("Edit", "EditUser", "Home", new { UserId = item.UserID }, new { @class = "btn btn-warning" })
+            </div>
+            <div class="col-md-1">
+                @Html.ActionLink("Delete", "DeleteUser", "Home", new { UserId = item.UserID }, new { @class = "btn btn-danger" })
+            </div>
         </div>
     }
 </div>

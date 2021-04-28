@@ -5,14 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using TaskForBits.Services;
 using TaskForBits.Models;
-using System.Configuration;
-using System.Web.Mvc.Ajax;
 
 namespace TaskForBits.Controllers
 {
     public class HomeController : Controller
     {
-        readonly DBService dBService = new DBService();
+        private readonly DBService dBService = new DBService();
+        private readonly CSVService cSVService = new CSVService();
+
         public ActionResult Index()
         {
             return View(dBService.GetUsers().ToList<User>());
@@ -31,7 +31,7 @@ namespace TaskForBits.Controllers
             {
                 if (upload != null)
                 {
-                    dBService.GetUsersFromCsvToDB(upload);
+                    cSVService.GetUsersFromCsvToDB(upload);
                 }
                 return Redirect("/Home");
             }
@@ -46,10 +46,9 @@ namespace TaskForBits.Controllers
             return Redirect("/Home");
         }
         [HttpGet]
-        public ActionResult EditUser(int UserID)
-        {
-            List<User> users = dBService.GetUsers();
-            return View(users.Find(User => User.UserID == UserID));
+        public ActionResult EditUser(int UserID) 
+        { 
+            return View(dBService.GetUsers().Find(User => User.UserID == UserID)); 
         }
         [HttpPost]
         public RedirectResult EditUser(User user)
