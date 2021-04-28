@@ -12,27 +12,33 @@ namespace TaskForBits.Controllers
 {
     public class HomeController : Controller
     {
-        DBService dBService = new DBService();
+        readonly DBService dBService = new DBService();
         public ActionResult Index()
         {
-            List<User> users = dBService.GetUsers();
-            return View(users);
+            return View(dBService.GetUsers().ToList<User>());
         }
 
         [HttpPost]
         public ActionResult Index(string filterColumn)
         {
             IEnumerable<User> users = dBService.GetUsers();
-            return PartialView(users.OrderBy(prop => prop[filterColumn]));
+            return PartialView("FilterUser", users.OrderBy(prop => prop[filterColumn]));
         }
-        public RedirectResult ImportFromCSVToDB()
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase upload)
         {
-            CSVService cSVService = new CSVService();
-            foreach (var item in cSVService.GetUsersFromCsv(Server.MapPath("..\\data.csv")))
+            try
             {
-                dBService.SetUserIntoDB(item);
+                if (upload != null)
+                {
+                    dBService.GetUsersFromCsvToDB(upload);
+                }
+                return Redirect("/Home");
             }
-            return Redirect("/Home");
+            catch (Exception) 
+            {
+                return View("Error");
+            }
         }
         public RedirectResult DeleteUser(int UserID)
         {

@@ -1,7 +1,10 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using TaskForBits.Models;
@@ -37,6 +40,17 @@ namespace TaskForBits.Services
                     curUser.Salary = user.Salary;
                     db.Entry(curUser).State = EntityState.Modified;
                     db.SaveChanges();
+            }
+        }
+        public void GetUsersFromCsvToDB(HttpPostedFileBase upload)
+        {
+            using (var reader = new StreamReader(upload.InputStream))
+            using (var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                foreach (BaseUser baseUser in csvReader.GetRecords<BaseUser>().ToList())
+                {
+                    SetUserIntoDB(new User(baseUser));
+                }
             }
         }
     }

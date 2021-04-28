@@ -24,6 +24,7 @@ namespace TaskForBits.Models
         public User(BaseUser baseUser)
         {
             Name = baseUser.Name;
+            Married = baseUser.Married;
             DateOfBirth = baseUser.DateOfBirth;
             Phone = baseUser.Phone;
             Salary = baseUser.Salary;

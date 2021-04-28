@@ -1,33 +1,5 @@
 ﻿@model IEnumerable<TaskForBits.Models.User>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-</div>
-<div>
-    <a href="\Home\ImportFromCSVToDB">IMPORT</a>
-</div>
-<div>
-    <br />
-    <div class="row">
-        <div class="col-md-1">
-            <input name="UserID" id="UserID" type="submit" value="UserID" />
-        </div>
-        <div class="col-md-2">
-            <input name="Name" id="Name" type="submit" value="UserID" />
-        </div>
-        <div class="col-md-2">
-            <input name="DateOfBirth" id="DateOfBirth" type="submit" value="DateOfBirth" />
-        </div>
-        <div class="col-md-1">
-            <input name="Married" id="Married" type="submit" value="Married" />
-        </div>
-        <div class="col-md-2">
-            <input name="Phone" id="Phone" type="submit" value="Phone" />
-        </div>
-        <div class="col-md-2">
-            <input name="Salary" id="Salary" type="submit" value="Salary" />
-        </div>
-    </div>
     @foreach (var item in Model)
     {
         <br />

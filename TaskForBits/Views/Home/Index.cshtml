@@ -1,22 +1,35 @@
 ﻿@model IEnumerable<TaskForBits.Models.User>
 
-
+@using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="upload" accept=".csv" />
+    <br>
+    <input type="submit" value="Submit" />
+}
+<div>
+    <br />
+    <div class="row">
+        <div class="col-md-1">
+            <input name="UserID" id="UserID" type="submit" value="UserID" />
+        </div>
+        <div class="col-md-2">
+            <input name="Name" id="Name" type="submit" value="Name" />
+        </div>
+        <div class="col-md-2">
+            <input name="DateOfBirth" id="DateOfBirth" type="submit" value="DateOfBirth" />
+        </div>
+        <div class="col-md-1">
+            <input name="Married" id="Married" type="submit" value="Married" />
+        </div>
+        <div class="col-md-2">
+            <input name="Phone" id="Phone" type="submit" value="Phone" />
+        </div>
+        <div class="col-md-2">
+            <input name="Salary" id="Salary" type="submit" value="Salary" />
+        </div>
+    </div>
+</div>
     <div id="IndexRecall">
         @Html.Partial("FilterUser", Model)
     </div>
-    <script>
-        $(document).ready(function () {
-            $("#UserID, #Name, #DateOfBirth, #Married, #Phone, #Salary").click(function (event) {
-                $.ajax({
-                    type: "post",
-                    url: '/Home/Index?filterColumn=' + event.target.id,
-                    type: "POST",
-                    success: function (result) {
-                        $("#IndexRecall").html(result);
-                    }
-                }).done(function () {
-                    $(this).addClass("done");
-                });
-            })
-        });
-    </script>
+
